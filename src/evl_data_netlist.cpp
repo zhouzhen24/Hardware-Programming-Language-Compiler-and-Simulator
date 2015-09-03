@@ -29,8 +29,6 @@ bool netlist::create(const evl_wires &wires,
 bool   netlist::save(std::string file_name,
                      std::string module_name)
 {
-    //std::string fname = evl_file_name + ".netlist";
-    //std::ofstream   output_file(fname.c_str());
     std::ofstream output_file(file_name.c_str());
 
     
@@ -140,14 +138,7 @@ bool    netlist::create_gates(const evl_components &comps,
 bool	netlist::create_gate(const evl_component &c,
                              const evl_wires_table &wires_table)
 {
-//    gate *g;
-//    if (c.type == "evl_dff") {             //details in ppt:lec10, Page 108
-//        g = new flip_flop(c.name);
-//    }
-//    else if (c.type == "and") {
-//        g = new and_gate(c.name);
-//    }
-    //else if...
+
     
     gate *g = new gate;
     gates_.push_back(g);
@@ -177,10 +168,6 @@ net::net(std::string net_name)
 {
     name_ = net_name;
     value_ = false;
-	//bwp_ = false;
-	//next_value_ = false;
-	//bwchange_ = true;
-	//priority_ = -1;
 	bwcomf = false;
     value1_ = false;
 }
@@ -235,13 +222,11 @@ bool    net::find_drive(pin * &drive)
         return true;
     }
     else  if  (drive_count ==0){
-       // std::cerr << get_name() << " has no drive" << std::endl;
         return false;
     }
     else{
         std::cerr << get_name() << " has too many drives" << std::endl;
         assert(false);
-        //return false;
     }
 }
 
@@ -269,10 +254,6 @@ bool    net::retrieve_logic_value()
     }
     
 }
-
-
-//
-
 
 
 /*----------------------------------------*/
@@ -310,22 +291,9 @@ bool gate::create_pin(const evl_pin &ep,
 }
 
 
- bool	gate::validate_structural_semantics()   //
+ bool	gate::validate_structural_semantics() 
 {
-    //for project 4. details in ppt:lec10, Page 97
-    //assert(false);
-    //return false;
-    
-    // predef_gates
-    //  type                                 # of pins
-    //	and, or, xor                            >=3
-    //  not, buf                                =2
-    //  evl_dff, tris                           =3
-    //  evl_clock                               =1
-    //	evl_one, evl_zero, evl_input            >=1
-    //  evl_output                              >=1
-    
-    
+       
     if ((type_ == "and") || (type_ == "or") || (type_ == "xor"))
     {
         if (pins_.size() < 3)
@@ -471,8 +439,6 @@ bool pin::create(gate *g,
             std::cerr << "Cannot find pin's name in nets_table" << std::endl;
             return false;
         }
-        //net = find net_name in nets_table
-        //assert(nets_table.find(p.name) != nets_table.end());
         nets_.push_back(n);
         n->append_pin(this);
     }
@@ -481,8 +447,6 @@ bool pin::create(gate *g,
         // a bus ...
         for (int bus_index = p.bus_lsb; bus_index <= p.bus_msb; ++bus_index)
         {
-            //			if (bus_index == -1)
-            //				bus_index = p.bus_msb;
             std::string	pin_name = make_net_name(p.name, bus_index);
             net	*n;
             evl_nets_table::const_iterator	ni = nets_table.find(pin_name);
@@ -495,8 +459,6 @@ bool pin::create(gate *g,
                 std::cout << "Cannot find pin's name in nets_table" << std::endl;
                 return false;
             }
-            //net = find net_name in nets_table
-            //assert(nets_table.find(p.name) != nets_table.end());
             nets_.push_back(n);
             n->append_pin(this);
         }
@@ -552,36 +514,22 @@ std::string make_net_name(std::string wire_name,
 
 
 
-//Project 4 Simulation
+//Simulation
 
 void    netlist::simulate(int cycles)
 {
 	map_priority_scheduler  scheduler(*this);
     for (int i = 0; i < cycles; i++)
     {
-
-		//scheduler.optimal_run(i);
-
-		//std::vector<net *> &input_nets, std::vector<bool> &inputs
-
 		std::vector<net *> input_nets;
 		std::vector<bool> inputs;
-
-
 		scheduler.hier_run(input_nets, inputs);
-        
     }//simulate desired cycles
     
     
 }
 
 std::string netlist::evl_file_name = "default_evl_file_name";
-
-
-
-
-
-
 
 //optimal
 
@@ -704,16 +652,6 @@ void	net::update_value(bool input_value)
 {
 	next_value_ = input_value;
 	next_value1_ = false;
-	/*if (next_value_ != value_)
-	{
-		value_ = next_value_;
-		bwchange_ = true;
-	}
-	else
-	{
-		bwchange_ = false;
-	}*/
-
 }
 
 //for tris
@@ -721,39 +659,6 @@ void    net::update_value(bool input_value1, bool input_value)
 {
     next_value1_ = input_value1;
     next_value_ = input_value;
-    
-    //pin * drive;
-    //if(find_drive(drive)){// set value from drive
-    //    
-    //    if (drive->get_gate()->get_type().compare("buf")==0||
-    //        drive->get_gate()->get_type().compare("tris")==0) {
-    //        std::vector<bool> gate_output_temp;
-    //        drive->get_gate()->compute_output(gate_output_temp);
-    //        next_value1_ = gate_output_temp[1];
-    //        next_value_ = gate_output_temp[0];
-    //    }
-    //    
-    //}
-    //else//if no drive, that is, all Z
-    //{
-    //    value1_ = 1;
-    //    value_ = 1;
-    //}
-    
-    
-    
-    //if ((next_value_ != value_) || (next_value1_ != value1_))
-    //{
-    //    value1_ = next_value1_;
-    //    value_ = next_value_;
-    //    bwchange_ = true;
-    //}
-    //else
-    //{
-    //    bwchange_ = false;
-    //}
-    
-    
 }
 
 
@@ -762,31 +667,6 @@ void    net::set_value(bool v1, bool v)
 	value1_ = v1;
 	value_ = v;
 	set_comf();
-
-
-
-
-    //pin * drive;
-    //if(find_drive(drive)){// set value from drive
-
-
- /*       if (drive->get_gate()->get_type().compare("buf")==0||
-            drive->get_gate()->get_type().compare("tris")==0) {
-            std::vector<bool> gate_output_temp;
-            drive->get_gate()->compute_output(gate_output_temp);
-            value1_ = gate_output_temp[1];
-            value_ = gate_output_temp[0];
-			set_comf();
-        }
-        */
-  //  }
-  //  else
-  //  {
-		//set_comf();
-  //      value1_ = 1;
-  //      value_ = 1;
-  //  }
-
 }
 
 

@@ -9,10 +9,7 @@
 #ifndef __Logic_Simulation__and_gate__
 #define __Logic_Simulation__and_gate__
 
-
 #include "logic_gate.h"
-
-
 
 class and_gate: public logic_gate
 {
@@ -22,12 +19,8 @@ class and_gate: public logic_gate
 public:
     and_gate(std::string name): logic_gate("and", name), state_(false), next_state_(false) {}
     bool    validate_structural_semantics();
- //   static void store_prototype(gate_prototypes &gps);
     static void store_prototype();
     virtual bool evaluate(const std::vector<bool> &inputs);
-    
-    //Might Suprise!!!
-    //bool    evaluate(const std::vector<bool> &inputs);
 };
 
 

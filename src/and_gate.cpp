@@ -31,11 +31,7 @@ void and_gate::store_prototype()
 {
     gate_prototypes::instance()->store("and", new and_gate("prototype"));
 }
-//void and_gate::store_prototype(gate_prototypes &gps)
-//{
-//    assert(gps.find("and") == gps.end());
-//    gps["and"] = new and_gate("prototype");
-//}
+
 
 bool and_gate::evaluate(const std::vector<bool> &inputs)
 {
@@ -48,9 +44,3 @@ bool and_gate::evaluate(const std::vector<bool> &inputs)
     }
     return true;
 }
-
-
-
-
-
-

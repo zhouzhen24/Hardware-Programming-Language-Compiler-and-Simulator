@@ -8,9 +8,6 @@
 
 #include "bin_to_hex.h"
 
-
-
-
 std::string  bin_to_hex(std::bitset<4> bit)
 {
     if (bit.to_string().compare("0000") == 0)   return  std::string("0");

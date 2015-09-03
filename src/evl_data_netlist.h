@@ -9,11 +9,6 @@
 #include    <vector>
 
 
-// from Proj Bonus
-//#include "hier_factory.h"
-
-
-
 class netlist;
 class gate;
 class net;
@@ -26,14 +21,6 @@ evl_wires_table make_wires_table(const evl_wires &wires);
 // nets table
 typedef std::map<std::string, net *> evl_nets_table;
 std::string make_net_name(std::string wire_name, int i);
-
-// from Proj 4
-//typedef std::map<std::string, gate *> gate_prototypes;
-
-
-
-// data structures(class)
-
 
 class net
 {
@@ -62,7 +49,7 @@ class net
     
 public:
 	net(std::string net_name);
-	net() :bwcomf(false), value_(false), value1_(false)/*next_value_(false), bwchange_(true), priority_(-1), bwp_(false)*/{}
+	net() :bwcomf(false), value_(false), value1_(false){}
     bool    find_drive(pin * &drive);
     bool    retrieve_logic_value();
     
@@ -103,7 +90,6 @@ class pin
     size_t pin_index_;
     std::list<net *> nets_;
     
-    //enum    input_output_database{_in, _out};
     bool    in_out_;// out:0  ;  in:1
 public:
 	bool	create(gate *g, size_t pin_index, const evl_pin &p, const evl_nets_table &nets_table);
@@ -139,11 +125,10 @@ private:
 	bool            create_pin(const evl_pin &ep, size_t pin_index, const evl_nets_table &nets_table, const evl_wires_table &wires_table);
 
 
-    //from Proj 4
     virtual gate * clone(std::string name)
     {
         return new gate;
-    }// = 0
+    }
 
 	//for optimal
 	int		priority_;
@@ -165,8 +150,6 @@ public:
     virtual bool    compute_output(){return false;}
     virtual bool    compute_output(std::vector<bool> &v){return false;}
     virtual void    compute_next_state(){}
-    //test_out
-    //virtual bool evaluate(const std::vector<bool> &inputs){ return true;}
 
     //for evl_input only
     virtual std::vector<bool> evl_input_get_pins_value(){std::vector<bool> v;v.push_back(false); return v;}
@@ -180,7 +163,6 @@ public:
 	void	set_p() { bwp_ = true; }
 	int		ask_priority();//return value is priority of THIS level
 
-	//bonus phase 2
 	virtual void get_nl(netlist * &nl){}
 
 

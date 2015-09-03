@@ -8,31 +8,10 @@
 
 #include "simulation_event.h"
 #include "new_process_statements_functions.h"
-//std::list<simulation_event *> all_events;
-
-
-//simulation_event &simulation_event::operator=(const simulation_event &se)
-//{
-//    gate_ = se.gate_;
-//    net_ = se.net_;
-//    bwgate_ = se.bwgate_;
-//    priority_ = se.priority_;
-//    return *this;
-//}
 
 void    simulation_event::set_priority(int pri)
 {
     priority_ = pri;
-	//if (bwgate_)
-	//{
-	//	gate_->set_priority(pri);
-	//	gate_->set_p();
-	//}
-	//else
-	//{
-	//	net_->set_priority(pri);
-	//	net_->set_p();
-	//}
 }
 
 int simulation_event::get_priority()
@@ -130,9 +109,7 @@ bool    simulation_event::find_next_events(std::list<simulation_event *> &next_e
                     next_events.push_back(*sei);
                 }
             }
-        }
-        
-        
+        }   
     }
     if (next_events.size() == 0) {
         return false;
@@ -168,8 +145,6 @@ bool simulation_event::check_prev_events()
         }
         //if all inputs are scheduled
         return true;
-        
-        
     }
     else{// if it is net
         net * net_temp = get_net_pointer();
@@ -182,13 +157,10 @@ bool simulation_event::check_prev_events()
                 if (!(*sei)->get_schedule()) {
                     return false;
                 }
-
             }
-            
         }
         return true; // if all gates are scheduled
     }
-    
 }
 
 
@@ -215,7 +187,6 @@ void    simulation_event::insert_next_level_event(priority_scheduler_i *schedule
                 }
             }
         }
-        
     }
 }
 
@@ -228,7 +199,6 @@ void    simulation_event::fire(priority_scheduler_i *scheduler)
         assert(net_ == NULL);
         //NOTE: update flip_flop here might cause problem
         if (gate_->get_type().compare("evl_dff") == 0) {
-            //gate_->compute_next_state();
         }
         else if(gate_->get_type().compare("evl_lut") == 0)
         {
@@ -241,7 +211,6 @@ void    simulation_event::fire(priority_scheduler_i *scheduler)
                 std::list<net *> nets_temp = gate_->get_pins().front()->get_nets();
                 int word_index = 0;
                 for (std::list<net *>::iterator ni = nets_temp.begin(); ni != nets_temp.end(); ni++) {
-                    //int test = (gate_->evl_lut_get_pins_value())[word_index];
                     (*ni)->set_value(gate_->evl_lut_get_pins_value()[word_index]);
                     (*ni)->set_comf();
                     word_index++;
@@ -265,26 +234,7 @@ void    simulation_event::fire(priority_scheduler_i *scheduler)
         }//buf&tris
         
         else if(find_in_third_party(gate_)){ //find in third party
-
 			return;
-
-      //      std::vector<bool>   value_temp;
-      //      int value_index = 0;
-      //      gate_->compute_output(value_temp);
-      //      //every pin in the gate
-      //      std::vector<pin *> pins_temp = gate_->get_pins();
-      //      for (int pi = 0; pi < pins_temp.size(); pi++) {
-      //          if (pins_temp[pi]->get_inout() == 0){
-      //              std::list<net *> nets_temp = (pins_temp[pi])->get_nets();
-      //              //for every net in the pin
-      //              for (std::list<net *>::iterator ni = nets_temp.begin(); ni != nets_temp.end(); ni++) {
-      //                  (*ni)->set_value(value_temp[value_index]);
-      //                  (*ni)->set_comf();
-						//value_index++;
-      //              }
-      //          }
-      //      }
-            
         }
         
         
@@ -304,11 +254,9 @@ void    simulation_event::fire(priority_scheduler_i *scheduler)
             }
         }
     }
-    //for bonus, it will have problem when fire port's pin's nets
     else//fire net event
     {
         assert(gate_ == NULL);
-        //net_->retrieve_logic_value();//NOTE!!! evl_input is special
 
 		pin * drive;//check drive
 		if (!net_->find_drive(drive))//if no drive
@@ -348,31 +296,7 @@ void	simulation_event::optimal_fire(priority_scheduler_i	*scheduler)
             //bonus
             if(find_in_third_party(gate_))
 			{ //find in third party
-
-
 				return;
-
-
-       //         std::vector<bool>   value_temp;
-       //         int value_index = 0;
-       //         gate_->compute_output(value_temp);
-       //         //every pin in the gate
-       //         std::vector<pin *> pins_temp = gate_->get_pins();
-       //         for (int pi = 0; pi < pins_temp.size(); pi++) {
-       //             if (pins_temp[pi]->get_inout() == 0){
-       //                 std::list<net *> nets_temp = (pins_temp[pi])->get_nets();
-       //                 //for every net in the pin
-       //                 for (std::list<net *>::iterator ni = nets_temp.begin(); ni != nets_temp.end(); ni++) {
-       //                     (*ni)->update_value(value_temp[value_index]);
-							//value_index++;
-       //                     if((*ni)->get_bwchange())
-       //                     {
-       //                         scheduler->insert_event(new simulation_event((*ni), (*ni)->get_priority()));
-       //                     }
-       //                 }
-       //             }
-       //         }
-       //         
             }
             else{
                 bool	value_temp = gate_->compute_output();
@@ -386,20 +310,11 @@ void	simulation_event::optimal_fire(priority_scheduler_i	*scheduler)
 		}
         else if (gate_->get_type().compare("evl_lut") == 0)
         {
-            //handle evl_lut
-            //note simulation_event::insert_next_level_event() might be used here
-//            
-//            std::cerr << "handle evl_lut in simulation_event::optimal_fire() !!!!!" <<std::endl;
-//            assert(false);
-            
-            
             //read the lut file
             if(!gate_->compute_output())//if address is illegal
                 assert(false);
             
             //assign values to pins
-            //pin * pin_temp = gate_->get_pins().front();//pins[0]
-            //for every bit in pins[0]
             std::list<net *> nets_temp = gate_->get_pins().front()->get_nets();
             int word_index = 0;
             for (std::list<net *>::iterator ni = nets_temp.begin(); ni != nets_temp.end(); ni++) {
@@ -430,30 +345,7 @@ void	simulation_event::optimal_fire(priority_scheduler_i	*scheduler)
         
         
         else if(find_in_third_party(gate_)){ //find in third party
-
-
-
 			return;
-      //      std::vector<bool>   value_temp;
-      //      int value_index = 0;
-      //      gate_->compute_output(value_temp);
-      //      //every pin in the gate
-      //      std::vector<pin *> pins_temp = gate_->get_pins();
-      //      for (int pi = 0; pi < pins_temp.size(); pi++) {
-      //          if (pins_temp[pi]->get_inout() == 0){
-      //              std::list<net *> nets_temp = (pins_temp[pi])->get_nets();
-      //              //for every net in the pin
-      //              for (std::list<net *>::iterator ni = nets_temp.begin(); ni != nets_temp.end(); ni++) {
-      //                  (*ni)->update_value(value_temp[value_index]);
-						//value_index++;
-      //                  if((*ni)->get_bwchange())
-      //                  {
-      //                      scheduler->insert_event(new simulation_event((*ni), (*ni)->get_priority()));
-      //                  }
-      //              }
-      //          }
-      //      }
-            
         }
 
 
@@ -468,7 +360,6 @@ void	simulation_event::optimal_fire(priority_scheduler_i	*scheduler)
 		if (!net_->find_drive(drive))//if no drive
 		{
 			net_->set_value(1, 1);
-			//net_->get_bwchange();//update value1_ and value_
 		}
 		else//if one drive
 		{
@@ -501,11 +392,5 @@ void	simulation_event::optimal_fire(priority_scheduler_i	*scheduler)
                 }
             }
         }
-
-
-        //find all outputs of net, that is input of gate
-
-		
-
 	}
 }

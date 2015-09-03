@@ -26,8 +26,6 @@ class   port{
     pin *   pin_outside_;
     pin *   pin_inside_;
     
-    //std::vector<net *> nets_;
-    
 public:
     port(std::string name, int width):name_(name), width_(width){}
     ~port(){delete pin_outside_; delete pin_inside_;}
@@ -78,9 +76,6 @@ struct  new_netlist{
     //assign
     evl_assigns     all_assigns;
     
-    
-    //evl_ports       all_ports;
-    
     evl_components  get_assign_as_buf();
     evl_wires       get_ports_as_wires();
     
@@ -91,8 +86,6 @@ typedef std::list<new_netlist> new_netlists;
 //global variable
 
 extern new_netlists    notop_netlists;
-
-
 
 
 #endif

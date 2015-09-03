@@ -10,14 +10,9 @@
 
 
 void flip_flop::compute_next_state() {
-    net *input_net = pins_[1]->get_nets().back();//NOTE!!!! details in ppt:lec10, Page 74
+    net *input_net = pins_[1]->get_nets().back();
     next_state_ = input_net->retrieve_logic_value();
     state_ = next_state_;
-
-
-	//optimal
-
-
 
 }
 
@@ -37,12 +32,6 @@ flip_flop * flip_flop::clone(std::string name)
     return new  flip_flop(name);
 }
 
-//void flip_flop::store_prototype(gate_prototypes &gps)
-//{
-//    assert(gps.find("evl_dff") == gps.end());
-//    gps["evl_dff"] = new flip_flop("prototype");
-//}
-
 void flip_flop::store_prototype()
 {
     gate_prototypes::instance()->store("evl_dff", new flip_flop("prototype"));
@@ -52,8 +41,5 @@ void flip_flop::store_prototype()
 
 bool flip_flop::evaluate(const std::vector<bool> &inputs)
 {
-    //assert(inputs.size() == 2);
-    //state_ = next_state_;
-    //next_state_ = inputs.front();
     return state_;
 }

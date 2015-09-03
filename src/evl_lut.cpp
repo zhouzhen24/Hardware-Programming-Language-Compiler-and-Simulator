@@ -89,8 +89,8 @@ bool evl_lut::evaluate(const std::vector<bool> &inputs)// read the evl_lut file 
                     size_buf = 0;
                 }
                 i++;
+
                 //read input(pins_[1])'s size()
-                //int size_buf = 0;
                 if (line[i] <= '9' && line[i] >= '0' )
                 {
                     size_t number_begin = i;
@@ -163,8 +163,7 @@ bool evl_lut::evaluate(const std::vector<bool> &inputs)// read the evl_lut file 
 		lut.close();
                 return true;//force to exit the for loop
             }
-            //break;
-        }//else if (line_no == input_line_no + 2)
+        }
     }//getline()
     
     lut.close();

@@ -28,18 +28,10 @@ class evl_input: public logic_gate
 public:
     evl_input(std::string name): logic_gate("evl_input", name), state_(false), next_state_(false), lineno_(1), tranno_(0), first_flag(true) {}
     bool    validate_structural_semantics();
-    //   static void store_prototype(gate_prototypes &gps);
+
     static void store_prototype();
     virtual bool evaluate(const std::vector<bool> &inputs);
     std::vector<bool> evl_input_get_pins_value();
-    
-    
-    //Might Suprise!!!
-    //bool    evaluate(const std::vector<bool> &inputs);
-    
-    
-    
-    
 };
 
 #endif /* defined(__Logic_Simulation__evl_input__) */

@@ -24,6 +24,7 @@ int main(int argc, char * argv[]) {
     //*need new structrue to store groups of statements
     //*the group has bwtop_ member
     
+    //lexcial
     if(!lex(argc, argv))
     {
         std::cerr << "Error in Lexcial Analysis" << std::endl;
@@ -59,38 +60,48 @@ int main(int argc, char * argv[]) {
     new_netlist    top_netlist;//, notop_netlists;//notop_netlist is from new_struct.h
     
     //if bwtop_
-    if(!process_top_statements(top_statements.front().statements_, top_netlist.module, top_netlist.all_wires, top_netlist.all_components, top_netlist.endmodule, top_netlist.all_assigns)){
+    if(!process_top_statements(top_statements.front().statements_,
+		 top_netlist.module,
+		 top_netlist.all_wires,
+		 top_netlist.all_components,
+		 top_netlist.endmodule,
+		 top_netlist.all_assigns))
+    {
         std::cerr << "Cannot process statements in top module" << std::endl;
         return -1;
     }
+
     //add assign to "assign" in evl_components
 	if (!top_netlist.all_assigns.empty())
 	{
 		//for ci system
 		evl_components	buf_components_temp = top_netlist.get_assign_as_buf();
-		top_netlist.all_components.insert(top_netlist.all_components.end(), buf_components_temp.begin(), buf_components_temp.end());
-
-
-		//original
-		//top_netlist.all_components.splice(top_netlist.all_components.end(), top_netlist.get_assign_as_buf());
+		top_netlist.all_components.insert(top_netlist.all_components.end(),
+						                    buf_components_temp.begin(),
+						                    buf_components_temp.end());
 	}
 
 
     //if not bwtop_
     for (one_module_statements_group::iterator nsi = notop_statements.begin(); nsi != notop_statements.end(); nsi++) {
         new_netlist notop_netlist_temp;
-        if(!process_notop_statements((*nsi).statements_, notop_netlist_temp.module, notop_netlist_temp.all_wires, notop_netlist_temp.all_components, notop_netlist_temp.endmodule, notop_netlist_temp.all_assigns)){
+        if(!process_notop_statements((*nsi).statements_, 
+		notop_netlist_temp.module, 
+		notop_netlist_temp.all_wires,
+	        notop_netlist_temp.all_components, 
+		notop_netlist_temp.endmodule,
+		notop_netlist_temp.all_assigns))
+	{
             std::cerr << "Cannot process statements in user-definded gate" << std::endl;
             return -1;
         }
-		if (!notop_netlist_temp.all_assigns.empty())
+	if (!notop_netlist_temp.all_assigns.empty())
 		{
 			//for ci system
 			evl_components	buf_components_temp = notop_netlist_temp.get_assign_as_buf();
-			notop_netlist_temp.all_components.insert(notop_netlist_temp.all_components.end(), buf_components_temp.begin(), buf_components_temp.end());
-
-			//original
-			//notop_netlist_temp.all_components.splice(notop_netlist_temp.all_components.end(), notop_netlist_temp.get_assign_as_buf());
+			notop_netlist_temp.all_components.insert(notop_netlist_temp.all_components.end(),
+							 buf_components_temp.begin(),
+							 buf_components_temp.end());
 		}
         notop_netlists.push_back(notop_netlist_temp);
     }
@@ -102,7 +113,6 @@ int main(int argc, char * argv[]) {
     //*add third party
     
     store_standard_gate_prototypes();
-    //store_third_party_prototypes();
     
     netlist nl(argv);
     
@@ -111,36 +121,11 @@ int main(int argc, char * argv[]) {
     
     evl_director(&builder, top_netlist.all_wires, top_netlist.all_components);
     builder.finalize_creation();
+
     // testing part ends
     // save the netlist nl or perform simulation
     nl.save(std::string(argv[1])+".netlist", top_netlist.module.type);
     nl.simulate(1000);
-    
-    
-    
-    
-    
-    
-    
-    //if not bwtop_
-    //*to inside, it is a netlist
-    //*to outside, it is a gate
-    
-    
-    
-    
-    //*simulate from top
-    
-    
-    
-    
-    
-    //    if (simulation_main(argc, argv) != 0)
-    //    {
-    //        std::cerr << "Simulation Failed!" << std::endl;
-    //        return -1;
-    //    }
-    
     
     std::cout << "Program Ends\n";
     return 0;

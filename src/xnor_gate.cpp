@@ -24,11 +24,6 @@ void xnor_gate::store_prototype()
 {
 	gate_prototypes::instance()->store("xnor", new xnor_gate("prototype"));
 }
-//void xnor_gate::store_prototype(gate_prototypes &gps)
-//{
-//    assert(gps.find("and") == gps.end());
-//    gps["and"] = new xnor_gate("prototype");
-//}
 
 bool xnor_gate::evaluate(const std::vector<bool> &inputs)
 {

@@ -33,9 +33,8 @@ int	netlist_main(int argc, char* argv[])
     }
     
     std::string nl_file = std::string(argv[1])+".netlist";
-    nl.save(nl_file, module.type);  // save the netlist for Project 3
+    nl.save(nl_file, module.type); 
     
-    //nl.simulate(1000); // simulate 1000 cycles for Project 4
     
     return 0;
 	
@@ -49,11 +48,9 @@ bool	pin_semantic_update(const evl_wires_table &wires_table, evl_components &com
 	for (evl_components::iterator comp_index = comps.begin(); comp_index != comps.end(); ++comp_index)
 	{
 		//for each component
-		//evl_component	comp = (*comp_index);
 		for (evl_pins::iterator pin_index = (*comp_index).pins.begin(); pin_index != (*comp_index).pins.end(); ++pin_index)
 		{
 			//for each pin
-			//evl_pin	pin_ = (*pin_index);
 			evl_wires_table::const_iterator	wi = wires_table.find((*pin_index).name);
 			if ( wi == wires_table.end())
             {

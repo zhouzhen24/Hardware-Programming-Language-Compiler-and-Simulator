@@ -101,30 +101,4 @@ struct  evl_port{
     
 };
 
-
-
-
-//-------------------------------------------------------------//
-
-//data structure for statements
-
- // struct evl_statement
-
-
-//-------------------------------------------------------------//
-
-// data structure for module, wires, components and endmodule
-
-//MODULE
-
-//WIRES
-
-
-
-//COMPONENTS
-//PINS in COMPONENTS
-
-
-
-
 #endif // !_EVL_DATA_STRUCTURES

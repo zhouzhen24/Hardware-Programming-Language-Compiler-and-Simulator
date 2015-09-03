@@ -28,7 +28,7 @@ bool read_tokens_file(evl_tokens	&tokens, int argc, std::string file_name)
 			token.line_no = line_no;
 			//first word
 			// spaces
-			if (line[i] == ' ')//|| (line[i] == '\t')|| (line[i] == '\r') || (line[i] == '\n')
+			if (line[i] == ' ')
 			{
 				std::cerr << "wrong in .tokens file at line: " << line_no << std::endl;; // skip this space character
 				return false; // skip the rest of the iteration
@@ -151,12 +151,6 @@ bool group_tokens_into_statements(evl_statements &statements, evl_tokens &tokens
 			statements.push_back(component);
 		}
 	}
-
-
-
-
-
-
 	return true;
 }
 
@@ -642,33 +636,3 @@ bool output_syntax(char *argv[], evl_module &module, evl_wires &wires, evl_compo
 	}
 	return true;
 }
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

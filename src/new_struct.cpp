@@ -11,14 +11,10 @@
 
 void    port::set_as_input(){
     inout_ = 1;
-    //pin_outside_->set_as_input();
-    //pin_inside_->set_as_output();
 }
 
 void    port::set_as_output(){
     inout_ = 0;
-    //pin_outside_->set_as_output();
-    //pin_inside_->set_as_input();
 }
 
 
@@ -134,16 +130,11 @@ std::vector<buf_gate *> port::create_buf()
 				p->validate_structural_semantics();
 				bufs.push_back(p);
 
-
 				//delete pin_inside_ and pin_outside_ in nets connections
-				
-				
 				for (std::list<pin *>::iterator pin_net_out = (*outi)->connections_.begin(); pin_net_out != (*outi)->connections_.end(); pin_net_out++)
 				{
 					if ((*pin_net_out) == pin_outside_)
 					{
-						//(*outi)->connections_.erase(pin_net_out);
-
 						(*pin_net_out) = pin_out;
 						break;
 					}
@@ -153,7 +144,6 @@ std::vector<buf_gate *> port::create_buf()
 				{
 					if ((*pin_net_in) == pin_inside_)
 					{
-						//(*ini)->connections_.erase(pin_net_in);
 						(*pin_net_in) = pin_in;
 						break;
 					}
@@ -211,13 +201,10 @@ std::vector<buf_gate *> port::create_buf()
 				bufs.push_back(p);
 
 				//delete pin_inside_ and pin_outside_ in nets connections
-
-
 				for (std::list<pin *>::iterator pin_net_out = (*outi)->connections_.begin(); pin_net_out != (*outi)->connections_.end(); pin_net_out++)
 				{
 					if ((*pin_net_out) == pin_outside_)
 					{
-						//(*outi)->connections_.erase(pin_net_out);
 						(*pin_net_out) = pin_out;
 						break;
 					}
@@ -227,34 +214,18 @@ std::vector<buf_gate *> port::create_buf()
 				{
 					if ((*pin_net_in) == pin_inside_)
 					{
-						//(*ini)->connections_.erase(pin_net_in);
 						(*pin_net_in) = pin_in;
 						break;
 					}
 				}
-
-
 				ini++;
 			}
-
 			return bufs;
-
-
 		}
 	}
-
 }
-
-
-
-
-
-
-
 
 
 
 //global variable
 new_netlists    notop_netlists;
-
-

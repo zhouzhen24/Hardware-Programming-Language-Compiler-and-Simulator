@@ -21,15 +21,8 @@ class evl_output: public logic_gate
 public:
     evl_output(std::string name): logic_gate("evl_output", name), state_(false), next_state_(false), first_flag(true) {}
     bool    validate_structural_semantics();
-    //   static void store_prototype(gate_prototypes &gps);
     static void store_prototype();
     virtual bool evaluate(const std::vector<bool> &inputs);
-    
-    //Might Suprise!!!
-    //bool    evaluate(const std::vector<bool> &inputs);
-    
-    
-    
     
 };
 

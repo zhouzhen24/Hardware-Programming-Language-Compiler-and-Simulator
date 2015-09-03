@@ -13,9 +13,6 @@
 #include "evl_data_netlist.h"
 #include "assert.h"
 
-//typedef std::map<std::string, gate *> gate_prototypes;
-
-
 
 class gate_prototypes
 {

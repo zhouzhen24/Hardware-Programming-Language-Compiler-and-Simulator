@@ -22,23 +22,6 @@ bool    logic_gate::compute_output()
 }
 
 
-//void    logic_gate::save_inputs(std::vector<bool> inputs)
-//{
-//    inputs_ = inputs;
-//}
-//
-//bool    logic_gate::check_inputs(std::vector<bool> inputs)
-//{
-//    assert(inputs.size() == inputs_.size());
-//    for (size_t i = 0; i < inputs.size(); i++) {
-//        if (inputs[i] != inputs_[i]) {
-//            return  false;
-//        }
-//    }
-//    
-//    return true;
-//}
-
 
 
 void    logic_gate::retrieve(std::vector<bool> &inputs)

@@ -31,11 +31,6 @@ void or_gate::store_prototype()
 {
     gate_prototypes::instance()->store("or", new or_gate("prototype"));
 }
-//void or_gate::store_prototype(gate_prototypes &gps)
-//{
-//    assert(gps.find("or") == gps.end());
-//    gps["or"] = new or_gate("prototype");
-//}
 
 bool or_gate::evaluate(const std::vector<bool> &inputs)
 {

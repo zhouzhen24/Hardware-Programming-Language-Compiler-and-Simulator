@@ -39,12 +39,10 @@ void evl_output::store_prototype()
 bool evl_output::evaluate(const std::vector<bool> &inputs)
 {
     //only support logical values
-    //std::ofstream   out_put(std::string("ARGV")+std::string(".")+std::string(get_name())+".evl_output");
     std::string output_file_name(netlist::evl_file_name+std::string(".")+std::string(get_name())+".evl_output");
     
     //check whether file exits...
-    //std::ifstream   in_put;
-    //std::ofstream   out_put;
+    
     if (first_flag) {//if output file does not exit
         first_flag = false;
         std::ofstream out_put(output_file_name.c_str());
@@ -58,7 +56,6 @@ bool evl_output::evaluate(const std::vector<bool> &inputs)
             //for every pin in evl_output gate
             for (std::vector<pin *>::iterator pi = pins_.begin(); pi != pins_.end(); pi++) {
                 size_t  pinsize = (*pi)->get_nets().size();
-                //size_t  bitsize = ceil(pinsize/4);//bit size for hex
                 std::string outpin;
                 std::bitset<4> bset;
                 for (size_t epi = 0; epi < pinsize; epi++) {
@@ -66,7 +63,6 @@ bool evl_output::evaluate(const std::vector<bool> &inputs)
                     bset.set(bpos,(*i));
                     i++;
                     if ((bpos == 3)||(epi == pinsize -1)) {
-                        //outpin = bset.to_string() + outpin;
                         outpin = bin_to_hex(bset)+outpin;
                         bset.reset();
                     }
@@ -83,27 +79,16 @@ bool evl_output::evaluate(const std::vector<bool> &inputs)
         std::cout << std::endl;
     }
     else{// if exist
-        
-//        rename(output_file_name.c_str(), "temp.evl_output");
-//        std::ifstream in_put("temp.evl_output");
-//        std::ofstream out_put(output_file_name.c_str());
-//        //copy every line
-//        std::string line;
-//        for (; std::getline(in_put,line); ) {
-//            out_put << line << std::endl;
-//        }
-//        remove("temp.evl_output");
         std::ofstream    out_put;
         out_put.open(output_file_name.c_str(),std::ios::app);
-	if (!out_put.is_open())
-	{
-		std::cerr << "Cannot reopen " << output_file_name << std::endl;
-	}
+        if (!out_put.is_open())
+        {
+		    std::cerr << "Cannot reopen " << output_file_name << std::endl;
+        }
         for (std::vector<bool>::const_iterator i = inputs.begin(); i != inputs.end(); ) {
             //for every pin in evl_output gate
             for (std::vector<pin *>::iterator pi = pins_.begin(); pi != pins_.end(); pi++) {
                 size_t  pinsize = (*pi)->get_nets().size();
-                //size_t  bitsize = ceil(pinsize/4);//bit size for hex
                 std::string outpin;
                 std::bitset<4> bset;
                 for (size_t epi = 0; epi < pinsize; epi++) {
@@ -111,7 +96,6 @@ bool evl_output::evaluate(const std::vector<bool> &inputs)
                     bset.set(bpos,(*i));
                     i++;
                     if ((bpos == 3)||(epi == pinsize -1)) {
-                        //outpin = bset.to_string() + outpin;
                         outpin = bin_to_hex(bset)+outpin;
                         bset.reset();
                     }
@@ -129,16 +113,5 @@ bool evl_output::evaluate(const std::vector<bool> &inputs)
         out_put.close();
     }
     
-
-
-    
-    
-    
-
-    
     return true;
 }
-
-
-//bool    evl_output::first_flag = true;
-

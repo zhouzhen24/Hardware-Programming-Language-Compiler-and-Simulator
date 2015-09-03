@@ -18,9 +18,6 @@ class module: public gate
 {
     friend  class   hier_factory;
     
-    
-//    module *parent_; // optional, will be NULL for top module
-//    std::list<gate *> children_;
     netlist nl_;                // internal structure
     std::vector<port *> ports_; // should match pins_
     
@@ -34,17 +31,14 @@ class module: public gate
 public:
     module(std::string type, std::string name);
     module(std::string type);
-    //module(std::string type, std::string name, module *parent);
     ~module();
     
     
     void    create_ports(evl_ports ports);
-    //void    connect_ports_to_nets();
     
     virtual void retrieve(std::vector<bool> &inputs);
     virtual bool    compute_output(std::vector<bool> &v);
     
-    //bonus
 	void get_nl(netlist * &nl){
 		nl = &nl_;
 	}

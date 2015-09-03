@@ -1,10 +1,9 @@
+
+
+
+
+
 #include	"syn.h"
-
-
-
-
-
-
 
 bool	syn(int argc, char* argv[], evl_module& module, evl_wires& all_wires, evl_components& all_components, evl_endmodule& endmodule)
 {

@@ -32,11 +32,6 @@ void xor_gate::store_prototype()
 {
     gate_prototypes::instance()->store("xor", new xor_gate("prototype"));
 }
-//void xor_gate::store_prototype(gate_prototypes &gps)
-//{
-//    assert(gps.find("and") == gps.end());
-//    gps["and"] = new xor_gate("prototype");
-//}
 
 bool xor_gate::evaluate(const std::vector<bool> &inputs)
 {
@@ -52,8 +47,5 @@ bool xor_gate::evaluate(const std::vector<bool> &inputs)
     if (count1%2)//if it is odd
         return true;
     else
-        return false;
-    
-    
+        return false;   
 }
-

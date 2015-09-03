@@ -31,11 +31,7 @@ void buf_gate::store_prototype()
 {
     gate_prototypes::instance()->store("buf", new buf_gate("prototype"));
 }
-//void buf_gate::store_prototype(gate_prototypes &gps)
-//{
-//    assert(gps.find("buf") == gps.end());
-//    gps["buf"] = new buf_gate("prototype");
-//}
+
 
 bool buf_gate::evaluate(const std::vector<bool> &inputs)
 {

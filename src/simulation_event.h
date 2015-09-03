@@ -20,8 +20,6 @@ class   simulation_event: public    priority_event_i
     bool    bwgate_;
     int priority_;
     
-	//bool	bwp;// if set, = true
-    
 public:
     
     
@@ -39,8 +37,6 @@ public:
     
     bool    find_next_events(std::list<simulation_event *> &next_events);
     bool    check_prev_events();// return 1 if all previous events are scheduled
-    //simulation_event &operator=(const simulation_event &se);
-    
     virtual void    insert_next_level_event(priority_scheduler_i *scheduler);
     
   
@@ -55,7 +51,7 @@ public:
     simulation_event():gate_(NULL), net_(NULL), bwgate_(false), priority_(-1), priority_event_i(){}
     
 
-//	//for optimal
+//for optimize
 	void	optimal_fire(priority_scheduler_i *scheduler);
 	int	get_priority_optimal()
 	{
@@ -82,10 +78,6 @@ public:
 			priority_ = net_->get_priority();
 		}
 	}
-
-
-
-
 };
 
 

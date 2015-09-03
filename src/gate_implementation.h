@@ -25,7 +25,7 @@
 #include "evl_lut.h"
 #include "tris_gate.h"
 
-//bonus
+
 #include "xnor_gate.h"
 
 

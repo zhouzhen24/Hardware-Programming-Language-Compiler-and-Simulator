@@ -9,10 +9,8 @@
 #include "gate_prototypes.h"
 #include "gate_implementation.h"
 
-//bonus
 #include "module_from_gate.h"
 #include "new_struct.h"
-//new_netlists    notop_netlists;
 
 gate_prototypes *gate_prototypes::instance_ = NULL;
 
@@ -54,11 +52,8 @@ void store_standard_gate_prototypes() {
     evl_lut::store_prototype();
     tris_gate::store_prototype();
     
-    //bonus
 	xnor_gate::store_prototype();
     
-    
-    //...
 }
 
 void store_third_party_prototypes(){
@@ -67,16 +62,5 @@ void store_third_party_prototypes(){
     for (new_netlists::iterator nsi = notop_netlists.begin(); nsi != notop_netlists.end(); nsi++) {
             gate_prototypes::instance()->store((*nsi).module.type, new module("prototype"));
     }
-    
-    ///Note!!!!
     assert(false);
-    
-    
-    
-    //    gate_prototypes::instance()->store("evl_lut", new evl_lut("prototype"));
-
-    
 }
-
-
-

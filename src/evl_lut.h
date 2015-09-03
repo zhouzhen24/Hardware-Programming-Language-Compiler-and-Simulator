@@ -39,23 +39,16 @@ class evl_lut: public logic_gate
     
     
     
-    bool    first_flag;// = true;
+    bool    first_flag;
     
     
 public:
     evl_lut(std::string name): logic_gate("evl_lut", name), state_(false), next_state_(false),first_flag(true) {}/*,lineno_(1), tranno_(0), */
     bool    validate_structural_semantics();
-    //   static void store_prototype(gate_prototypes &gps);
+
     static void store_prototype();
     virtual bool evaluate(const std::vector<bool> &luts);
     std::vector<bool> evl_lut_get_pins_value();
-    
-    
-    //Might Suprise!!!
-    //bool    evaluate(const std::vector<bool> &luts);
-    
-    
-    
     
 };
 

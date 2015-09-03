@@ -56,9 +56,6 @@ protected:
 public:
     void insert_event(priority_event_i *event); // called by derived events
     
-//    //not eleganet!!!
-//    virtual std::list<priority_event_i *> get_all_events() = 0;
-    
 }; // class priority_scheduler_i
 
 
@@ -71,8 +68,6 @@ class map_priority_scheduler : public priority_scheduler_i
     virtual void insert(priority_event_i *event, int priority);
 
     netlist &nl_;
-    //std::list<priority_event_i *> all_events_;
-
 
 	//optimal
 	std::list<gate *>	input_dff;
@@ -95,7 +90,6 @@ public:
 	void	insert_fire();
 	void	update_gates();
     
-    //bonus
     void    hier_run(std::vector<net *> &input_nets, std::vector<bool> &inputs);
 
 }; // class map_priority_scheduler

@@ -16,12 +16,7 @@
 
 
 bool    segment_statements(evl_statements &all_statements, one_module_statements_group &top_statements, one_module_statements_group &notop_statements);
-
-
 bool    process_top_statements(evl_statements &statements, evl_module &module, evl_wires &wires, evl_components &components, evl_endmodule &endmodule, evl_assigns &assigns);
-
-
-
 bool    process_notop_statements(evl_statements &statements, evl_module &module, evl_wires &wires, evl_components &components, evl_endmodule &endmodule, evl_assigns &assigns);
 
 
@@ -30,8 +25,6 @@ bool process_assign_statement(evl_assigns &assigns, evl_statement &s);
 
 //new module statement
 bool new_process_module_statement(evl_module &module, evl_statement &s);
-
-
 
 //new_netlists    notop_netlists;
 bool    find_elements(new_netlists &notop_netlists, std::string &type, evl_module &module, evl_ports &ports, evl_wires &wires, evl_components  &comps);

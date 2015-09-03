@@ -24,28 +24,10 @@ void netlist_builder::add_net(std::string name)
     n->name_ = name;
     nl_.nets_table_[name] = n;
     nl_.nets_.push_back(n);
-    
-    //nl_.nets_.push_back(make_net()); //1st
-    //nl_.nets_.push_back(factory->make_net()); in ppt lec12
-        
 }
 
 size_t netlist_builder::add_gate(std::string type, std::string name)
 {
-
-    
-    
-//    gate *prototype = gate_prototypes::instance()->locate(type);
-//    
-//    //if (gps_.find(type) == gps_.end())
-//    if (prototype == NULL)
-//    {
-//        std::cerr << "Cannot find the type in Prototype_" << std::endl;
-//        return -1; // handling errors
-//    }
-    //nl_.gates_.push_back(gps_[type]->clone(name));//1st
-    //nl_.gates_.push_back(prototype->clone(name));//2nd
-    //nl_.gates_.push_back(make_gate(type, name));//3rd
     nl_.gates_.push_back(factory_->make_gate(type, name));
     return nl_.gates_.size()-1;
 }
@@ -85,10 +67,6 @@ void netlist_builder::gate_append_pin(size_t gate_index, std::string bus_name, i
         p->nets_.push_back(n);
         n->append_pin(p);
     }
-    
-    
-    //nl_.gates_[gate_id]->pins_.push_back(make_pin());
-    //nl_.gates_[gate_id]->pins_.push_back(factory_->make_pin());
 }
 
 bool netlist_builder::finalize_creation() {
@@ -114,10 +92,6 @@ bool netlist_builder::finalize_creation() {
 			nl_gate_temp.insert(nl_gate_temp.end(), gates_temp.begin(), gates_temp.end());
 			nl_net_temp.insert(nl_net_temp.end(), nets_temp.begin(), nets_temp.end());
 
-			//nl_.gates_.erase(gi);
-
-
-
 		}
 
 
@@ -129,33 +103,3 @@ bool netlist_builder::finalize_creation() {
 
     return true;
 }
-
-// factory methods
-//gate *netlist_builder::make_gate(std::string type, std::string name)
-//{
-//    gate *prototype = gate_prototypes::instance()->locate(type);
-//    if (prototype == NULL)// handling errors
-//    {
-//        std::cerr << "Cannot find the type in Prototype_" << std::endl;
-//        return NULL; // handling errors
-//    }
-//
-//    return prototype->clone(name);
-//}
-//
-//net *netlist_builder::make_net()
-//{
-//    return new net("");
-//}
-//
-//pin *netlist_builder::make_pin()
-//{
-//    return new pin;
-//}
-
-
-
-
-
-
-

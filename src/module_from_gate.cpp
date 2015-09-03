@@ -95,17 +95,6 @@ bool module::validate_structural_semantics() {
 
 	//push all nets, gates to top module
 
-	
-
-
-
-	//delete the module from  top  module
-
-    
-
-
-
-
     return true;
 }
 
@@ -137,37 +126,6 @@ void    module::create_ports(evl_ports ports){
         ports_.push_back(p);
     }
 }
-
-//void    module::connect_ports_to_nets(){
-//    
-//    //if find same name, call port.add_net_to_port()
-//    
-//    std::vector<net *>    nets = nl_.get_nets();
-//    //for every port
-//    for (std::vector<port *>::iterator pi = ports_.begin(); pi != ports_.end(); pi++) {
-//        //for every net name
-//        for (int i = 0; i < (*pi)->get_width(); i++) {
-//            // make name
-//            std::string name = make_net_name((*pi)->get_name(), i);
-//            //find the name
-//            for (std::vector<net *>::iterator ni = nets.begin(); ni != nets.end(); ni++) {
-//                if ((*ni)->get_name().compare(name) == 0) {
-//                    (*pi)->add_net_to_port((*ni));
-//                }
-//            }
-//        }
-//    
-//
-//    
-//    
-//    
-//    }
-//
-//
-//    
-//    
-//    
-//}
 
 
 
@@ -232,10 +190,3 @@ bool    module::compute_output(std::vector<bool> &v){
     
     return true;
 }
-
-
-
-
-
-
-

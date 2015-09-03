@@ -20,12 +20,8 @@ class not_gate: public logic_gate
 public:
     not_gate(std::string name): logic_gate("not", name), state_(false), next_state_(false) {}
     bool    validate_structural_semantics();
-    //   static void store_prototype(gate_prototypes &gps);
     static void store_prototype();
     virtual bool evaluate(const std::vector<bool> &inputs);
-    
-    //Might Suprise!!!
-    //bool    evaluate(const std::vector<bool> &inputs);
 };
 
 #endif /* defined(__Logic_Simulation__not_gate__) */

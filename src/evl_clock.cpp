@@ -12,10 +12,7 @@
 
 bool evl_clock::validate_structural_semantics() {
 	assert(pins_.size() == 1);
-    //for (size_t i = 0; i < pins_.size(); i++)
-    //{
-    //    pins_[i]->set_as_output();
-    //}
+
 	pins_[0]->set_as_output();
     return true;
 }

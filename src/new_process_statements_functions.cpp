@@ -49,14 +49,7 @@ bool    segment_statements(evl_statements &all_statements, one_module_statements
             }
             one_module_statement_temp.statements_.clear();
         }
-        
-        
-        
-        
-    }
-    
-    
-    
+    }    
     return true;
 }
 
@@ -113,10 +106,6 @@ bool    process_top_statements(evl_statements &statements, evl_module &module, e
                 std::cerr << "Wrong Statmement Type" << std::endl;
                 return false;
             }
-        
-    
-    
-    
         }
     return true;
 }
@@ -158,7 +147,6 @@ bool    process_notop_statements(evl_statements &statements, evl_module &module,
                 std::cerr << "Wrong ENDMODULE statement when store in Object" << std::endl;
                 return	false;
             }
-			//return	true;
         }
         else if ((statements.front().type) == (evl_statement::ASSIGN))
         {
@@ -173,24 +161,9 @@ bool    process_notop_statements(evl_statements &statements, evl_module &module,
             std::cerr << "Wrong Statmement Type" << std::endl;
             return false;
         }
-        
-        
-        
-        
     }
-
-    
-    
-    
-    
-    
-    
     return true;
 }
-
-
-
-
 
 
 
@@ -199,14 +172,11 @@ bool process_assign_statement(evl_assigns &assigns, evl_statement &s){
     enum state_type { INIT, LHS, LHS_NAME, LHS_BUS, LHS_MSB, LHS_COLON, LHS_LSB, LHS_DONE, RHS, RHS_NAME, RHS_BUS, RHS_MSB, RHS_COLON, RHS_LSB, RHS_DONE, DONE };
     state_type state = INIT;
     evl_assign	assign;
-    //evl_pin	pin;
     for (; !s.tokens.empty() && state != DONE; s.tokens.pop_front())
     {
         evl_token t = s.tokens.front();
-        
-        
-        //Enter state machine
-        
+
+        //Enter state machine        
         if (state == INIT)
         {
             if (t.str.compare("assign") == 0)
@@ -628,7 +598,6 @@ bool    find_elements(new_netlists &notop_netlists, std::string &type, evl_modul
             module = (*ni).module;
             ports = (*ni).module.ports;
             wires = (*ni).all_wires;
-            //wires.splice(wires.end(),(*ni).get_ports_as_wires());//original
 
 			//for ci system
 			evl_wires	wires_temp = (*ni).get_ports_as_wires();
@@ -639,7 +608,6 @@ bool    find_elements(new_netlists &notop_netlists, std::string &type, evl_modul
 
 
             comps = (*ni).all_components;
-            //comps.splice(comps.end(),(*ni).get_assign_as_buf());
             return true;
         }
     }
@@ -658,7 +626,6 @@ bool    find_net_in_nets(std::vector<net *> input_nets, net * input_net){
         }
     }
     return false;
-
 }
 
 
@@ -671,8 +638,5 @@ bool    find_in_third_party(gate * gate_input){
             return true;
         }
     }
-    return false;
-    
+    return false;   
 }
-
-

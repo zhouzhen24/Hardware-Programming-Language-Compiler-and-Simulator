@@ -8,6 +8,8 @@
 
 #ifndef Project_Bonus_ECE449_simulation_main_h
 #define Project_Bonus_ECE449_simulation_main_h
+
+
 #include <iostream>
 #include "netlist_main.h"
 #include "gate_implementation.h"
@@ -17,8 +19,5 @@
 
 
 int simulation_main(int argc, char * argv[]);
-
-
-
 
 #endif

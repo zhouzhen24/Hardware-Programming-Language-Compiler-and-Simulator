@@ -13,12 +13,6 @@ bool lex(int argc, char *argv[])
         return false;
     }
 
-
-
-
-
-
-
     std::ifstream input_file(argv[1]);
     if (!input_file)
     {

@@ -14,10 +14,6 @@
 #include "evl_director.h"
 #include "new_process_statements_functions.h"
 
-//new_netlists    notop_netlists;
-
-
-
 gate *hier_factory::make_gate(std::string type, std::string name) {
     
     gate *prototype = gate_prototypes::instance()->locate(type);
@@ -55,8 +51,3 @@ net *hier_factory::make_net(){
 pin *hier_factory::make_pin(){
     return new pin();
 }
-
-
-
-
-

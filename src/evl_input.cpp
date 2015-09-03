@@ -178,7 +178,6 @@ bool evl_input::evaluate(const std::vector<bool> &inputs)
                 }//save finish
                 
                 pin_no++;
-                //values_temp.clear();
                 if (pin_no == pins_width.size()) {//if all pins' values have been saved
                     break;
                 }
@@ -186,15 +185,8 @@ bool evl_input::evaluate(const std::vector<bool> &inputs)
                 
                 
             }
-            //if transition done, to this
-            //            if (tranno_ == current_line_trans_no)
-            //            {
-            //                tranno_ = 0;
-            //                lineno_++;
-            //                continue;
-            //            }
             break;
-        }//else if (line_no == lineno_)
+        }
     }//getline()
     
     in_put.close();
@@ -204,7 +196,6 @@ bool evl_input::evaluate(const std::vector<bool> &inputs)
     //update transition number
     
     tranno_++;
-    
     
     return true;
 }

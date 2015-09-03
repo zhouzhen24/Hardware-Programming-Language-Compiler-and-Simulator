@@ -20,7 +20,6 @@ class fifo_scheduler : public event_scheduler_i
 public:
     void insert(event_i *event);
     void run();
-    //void fire(event_scheduler_i *scheduler /*, std::string msg*/);
 }; // class fifo_scheduler
 
 #endif /* defined(__Cpractice__fifo_scheduler__) */

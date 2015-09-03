@@ -25,13 +25,6 @@ struct netlist_builder_i
     // create a pin and append it to a gate
     virtual void gate_append_pin(size_t gate_id, std::string bus_name, int lsb, int msb) = 0;
     
-    
-    
-//    virtual gate *make_gate(std::string type, std::string name) = 0;
-//    virtual net  *make_net() = 0;
-//    virtual pin  *make_pin() = 0;
-    
-    
 }; // struct netlist_builder_i
 
 
@@ -42,10 +35,7 @@ class netlist_builder : public netlist_builder_i
     
     netlist &nl_; // the netlist to be built
     
-//    gate_prototypes &gps_;
-    
-    //netlist_factory_i in ppt lec12
-    netlist_factory_i *factory_;//NOTE!!!!!!!!!!!!!!!!!!!
+    netlist_factory_i *factory_;
 
 public:
 
@@ -53,20 +43,8 @@ public:
     size_t  add_gate(std::string type, std::string name);
     void    gate_append_pin(size_t gate_id, std::string bus_name, int lsb, int msb);
     
-    
-//    virtual gate *make_gate(std::string type, std::string name);
-//    virtual net  *make_net();
-//    virtual pin  *make_pin();
-
-    
-    
-//    netlist_builder(netlist &nl, gate_prototypes &gps): nl_(nl), gps_(gps) {} //2nd version
-//    netlist_builder(netlist &nl) : nl_(nl) {} //1st&3rd version
     netlist_builder(netlist &nl, netlist_factory_i *factory): nl_(nl), factory_(factory) {}//4th version
     bool finalize_creation();
-    
-    //bonus
-    //netlist_builder(netlist &nl, netlist_factory_i *factory):nl_(nl){factory_ = factory;}
     
 }; // class netlist_builder
 

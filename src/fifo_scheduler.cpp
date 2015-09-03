@@ -14,10 +14,6 @@ void fifo_scheduler::insert(event_i *event)
     events_.push_back(event);
 }
 
-
-
-
-
 void fifo_scheduler::run()
 {
     for (; !events_.empty(); events_.pop_front())
